@@ -25,6 +25,7 @@ function App() {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderNumber, setOrderNumber] = useState("");
+  const [placedOrderTotal, setPlacedOrderTotal] = useState(0);
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [orderType, setOrderType] = useState<"delivery" | "pickup">("delivery");
@@ -314,6 +315,7 @@ function App() {
 
                     const nextOrderNumber = `BT-${Date.now().toString().slice(-7)}`;
                     setOrderNumber(nextOrderNumber);
+                    setPlacedOrderTotal(orderTotal);
                     setOrderPlaced(true);
                     setCartItems([]);
                     setAppliedPromo(false);
@@ -399,7 +401,7 @@ function App() {
                 <div className="order-success__summary">
                   <span>Order type</span><strong>{orderType === "delivery" ? "Delivery" : "Pickup"}</strong>
                   <span>Customer</span><strong>{customerName}</strong>
-                  <span>Estimated total</span><strong>{orderTotal.toLocaleString("en-US", { style: "currency", currency: "USD" })}</strong>
+                  <span>Estimated total</span><strong>{placedOrderTotal.toLocaleString("en-US", { style: "currency", currency: "USD" })}</strong>
                 </div>
                 <button className="cart-checkout" type="button" onClick={() => {
                   setIsCartOpen(false);
