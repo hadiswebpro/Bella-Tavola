@@ -7,20 +7,43 @@ import "./App.css";
 
 type CartItem = { food: Food; quantity: number };
 
+function loadCartFromStorage(): CartItem[] {
+  try {
+    const savedCart = window.localStorage.getItem("bella-tavola-cart");
+    if (!savedCart) return [];
+
+    const parsed: unknown = JSON.parse(savedCart);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.flatMap((item): CartItem[] => {
+      if (
+        typeof item !== "object" ||
+        item === null ||
+        !("food" in item) ||
+        typeof item.food !== "object" ||
+        item.food === null ||
+        !("id" in item.food) ||
+        typeof item.food.id !== "string" ||
+        !("quantity" in item) ||
+        typeof item.quantity !== "number" ||
+        !Number.isInteger(item.quantity) ||
+        item.quantity < 1
+      ) {
+        return [];
+      }
+
+      const currentFood = foods.find((food) => food.id === item.food.id);
+      return currentFood ? [{ food: currentFood, quantity: item.quantity }] : [];
+    });
+  } catch {
+    return [];
+  }
+}
+
 function App() {
   const [activeCategory, setActiveCategory] = useState<FoodCategory | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    try {
-      const savedCart = window.localStorage.getItem("bella-tavola-cart");
-      if (!savedCart) return [];
-
-      const parsed: unknown = JSON.parse(savedCart);
-      return Array.isArray(parsed) ? (parsed as CartItem[]) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [cartItems, setCartItems] = useState<CartItem[]>(loadCartFromStorage);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -117,7 +140,7 @@ function App() {
           <a className="main-nav__link" href="#story">Our Story</a>
         </nav>
 
-        <button className="cart-button" type="button" aria-label={`Cart, ${cartCount} items`} aria-expanded={isCartOpen} onClick={() => setIsMiniCartOpen((open) => !open)} aria-controls="mini-cart" aria-expanded={isMiniCartOpen}>
+        <button className="cart-button" type="button" aria-label={`Cart, ${cartCount} items`} onClick={() => setIsMiniCartOpen((open) => !open)} aria-controls="mini-cart" aria-expanded={isMiniCartOpen}>
           <span aria-hidden="true">🛍</span>
           <span className="cart-button__label">Cart</span>
           <span className="cart-button__count">{cartCount}</span>
