@@ -231,7 +231,7 @@ function App() {
             <div className="hero-photo-frame">
               <img
                 className="hero-food-photo"
-                src={foods.find((food) => food.id === "margherita-pizza")?.image ?? "/images/foods/margherita-pizza.webp"}
+                src={foods.find((food) => food.id === "margherita-pizza")?.image ?? `${import.meta.env.BASE_URL}images/foods/margherita-pizza.webp`}
                 alt="Fresh Margherita pizza with tomato, mozzarella, and basil"
                 fetchPriority="high"
               />
