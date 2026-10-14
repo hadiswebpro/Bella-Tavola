@@ -181,6 +181,48 @@ function App() {
           </div>
         </section>
 
+        <section className="bestsellers-section" aria-labelledby="bestsellers-title">
+          <div className="bestsellers-heading">
+            <div>
+              <span className="eyebrow">Loved at first bite</span>
+              <h2 id="bestsellers-title">Our <span>best-loved</span> bites</h2>
+              <p>A few guest favourites we think you’re going to love, too.</p>
+            </div>
+            <a href="#menu" className="bestsellers-link">Explore the full menu <span aria-hidden="true">↗</span></a>
+          </div>
+
+          <div className="bestsellers-grid">
+            {["spaghetti-carbonara", "margherita-pizza", "tiramisu"].map((foodId, index) => {
+              const food = foods.find((item) => item.id === foodId);
+              if (!food) return null;
+
+              return (
+                <article className="bestseller-card" key={food.id} style={{ animationDelay: `${index * 120}ms` }}>
+                  <div className="bestseller-card__image-wrap">
+                    <img src={food.image} alt={food.name} loading="lazy" />
+                    <span className="bestseller-card__badge">{index === 0 ? "Guest favourite" : index === 1 ? "A timeless classic" : "A sweet ending"}</span>
+                    <span className="bestseller-card__number" aria-hidden="true">0{index + 1}</span>
+                  </div>
+                  <div className="bestseller-card__body">
+                    <div className="bestseller-card__meta">
+                      <span>★ {food.rating.toFixed(1)}</span>
+                      <span>{food.category.replace("-", " ")}</span>
+                    </div>
+                    <h3>{food.name}</h3>
+                    <p>{food.description}</p>
+                    <div className="bestseller-card__bottom">
+                      <strong>{food.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</strong>
+                      <button type="button" onClick={() => handleAddToCart(food)} aria-label={`Add ${food.name} to cart`}>
+                        Add to cart <span aria-hidden="true">+</span>
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
         <section className="menu-section" id="menu">
           <div className="section-heading">
             <div>
@@ -225,11 +267,47 @@ function App() {
           <FoodGrid foods={visibleFoods} onAddToCart={handleAddToCart} />
         </section>
 
-        <section className="story-section" id="story">
-          <span className="story-section__ornament" aria-hidden="true">✳</span>
-          <p className="eyebrow">La dolce vita</p>
-          <h2>Every meal tells<br />a <span>little story.</span></h2>
-          <p>Simple ingredients, comforting classics, and a seat at the table for everyone.</p>
+        <section className="story-section" id="story" aria-labelledby="story-title">
+          <div className="story-section__visual" aria-hidden="true">
+            <div className="story-visual__halo"></div>
+            <div className="story-visual__plate"><span>Buon<br />appetito</span><span className="story-visual__leaf">✳</span></div>
+            <span className="story-visual__note story-visual__note--top">Fatto con amore</span>
+            <span className="story-visual__note story-visual__note--bottom">Gather • Share • Savour</span>
+            <span className="story-visual__spark story-visual__spark--one">✦</span>
+            <span className="story-visual__spark story-visual__spark--two">✧</span>
+          </div>
+
+          <div className="story-section__content">
+            <p className="eyebrow"><span aria-hidden="true">✳</span> La dolce vita — the sweet life</p>
+            <h2 id="story-title">More than a meal.<br />A place to <span>belong.</span></h2>
+            <p className="story-section__lead">
+              At Bella Tavola, we believe the best memories are made around a table.
+              Inspired by the warmth of Italian kitchens, our menu celebrates familiar
+              flavours, simple pleasures, and the joy of sharing one more bite.
+            </p>
+            <p className="story-section__copy">
+              From the first forkful of pasta to that last spoonful of tiramisù,
+              every dish is an invitation to slow down, stay a little longer, and
+              make room for good food and good company.
+            </p>
+
+            <div className="story-values">
+              <div className="story-value">
+                <span aria-hidden="true">✳</span>
+                <div><strong>Simple pleasures</strong><small>Comforting flavours, thoughtfully chosen.</small></div>
+              </div>
+              <div className="story-value">
+                <span aria-hidden="true">♡</span>
+                <div><strong>Made to be shared</strong><small>Because food tastes better together.</small></div>
+              </div>
+              <div className="story-value">
+                <span aria-hidden="true">☀</span>
+                <div><strong>A seat for everyone</strong><small>Come as you are. Leave a little happier.</small></div>
+              </div>
+            </div>
+
+            <a className="story-section__cta" href="#menu">Find your favourite <span aria-hidden="true">↗</span></a>
+          </div>
         </section>
       </main>
 
