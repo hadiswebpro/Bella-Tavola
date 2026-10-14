@@ -481,7 +481,7 @@ function App() {
                   </button>
                 </div>
               </>
-            )}
+            ))}
           </section>
         </div>
       )}
