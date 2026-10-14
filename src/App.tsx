@@ -385,6 +385,13 @@ function App() {
             <p>Something for every craving</p>
           </div>
 
+          <div className="site-footer__column site-footer__address">
+            <h2>Visit us</h2>
+            <p>123 Via Roma</p>
+            <p>Little Italy, New York, NY 10013</p>
+            <p className="site-footer__address-note">Demo address — replace before launch</p>
+          </div>
+
           <a href="#home" className="back-to-top" aria-label="Back to top">
             <span aria-hidden="true">↑</span> Back to top
           </a>
