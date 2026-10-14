@@ -596,3 +596,88 @@ button { cursor: pointer; }
   .checkout-heading h3 { font-size: 26px; }
   .checkout-view { padding-inline: 1px; }
 }
+
+
+/* Customer-facing promotional announcement */
+.promo-banner {
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  background: #3b4a35;
+  color: #fff8ed;
+}
+.promo-banner::before,
+.promo-banner::after {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgb(255 248 237 / 10%);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+.promo-banner::before { top: -105px; left: 8%; }
+.promo-banner::after { right: 12%; bottom: -120px; width: 190px; height: 190px; }
+.promo-banner__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  width: min(1200px, calc(100% - 64px));
+  min-height: 76px;
+  margin: 0 auto;
+  padding: 13px 0;
+}
+.promo-banner__sparkle { color: #f3c64e; font-size: 24px; }
+.promo-banner__message { display: flex; flex-direction: column; gap: 4px; }
+.promo-banner__eyebrow {
+  color: #d8c7a9;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+.promo-banner__message p { margin: 0; color: #fff8ed; font-size: 13px; }
+.promo-banner__message p > strong:first-child { color: #f3c64e; }
+.promo-banner__code {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 3px 8px;
+  border: 1px dashed rgb(243 198 78 / 75%);
+  border-radius: 5px;
+  color: #f3c64e;
+  font-size: 11px;
+  letter-spacing: 1.1px;
+}
+.promo-banner__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 36px;
+  margin-left: 8px;
+  padding: 0 14px;
+  border: 1px solid rgb(255 248 237 / 36%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 5%);
+  color: #fff8ed;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.promo-banner__button:hover { border-color: #f3c64e; background: #f3c64e; color: #30271f; }
+@media (max-width: 600px) {
+  .promo-banner__inner { width: calc(100% - 32px); min-height: 84px; gap: 10px; }
+  .promo-banner__sparkle { font-size: 19px; }
+  .promo-banner__eyebrow { font-size: 8px; letter-spacing: 1.2px; }
+  .promo-banner__message p { max-width: 245px; font-size: 11px; line-height: 1.6; }
+  .promo-banner__code { padding: 2px 5px; font-size: 10px; }
+  .promo-banner__button { gap: 5px; min-height: 33px; margin-left: auto; padding-inline: 10px; font-size: 9px; }
+}
+@media (max-width: 370px) {
+  .promo-banner__inner { width: calc(100% - 22px); gap: 7px; }
+  .promo-banner__message p { max-width: 190px; }
+  .promo-banner__button { padding-inline: 8px; }
+}
