@@ -22,6 +22,7 @@ function App() {
     }
   });
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderNumber, setOrderNumber] = useState("");
@@ -116,7 +117,7 @@ function App() {
           <a className="main-nav__link" href="#story">Our Story</a>
         </nav>
 
-        <button className="cart-button" type="button" aria-label={`Cart, ${cartCount} items`} aria-expanded={isCartOpen} onClick={() => setIsCartOpen(true)}>
+        <button className="cart-button" type="button" aria-label={`Cart, ${cartCount} items`} aria-expanded={isCartOpen} onClick={() => setIsMiniCartOpen((open) => !open)} aria-controls="mini-cart" aria-expanded={isMiniCartOpen}>
           <span aria-hidden="true">🛍</span>
           <span className="cart-button__label">Cart</span>
           <span className="cart-button__count">{cartCount}</span>
@@ -292,30 +293,9 @@ function App() {
           <div className="story-section__content">
             <p className="eyebrow"><span aria-hidden="true">✳</span> La dolce vita — the sweet life</p>
             <h2 id="story-title">More than a meal.<br />A place to <span>belong.</span></h2>
-            <p className="story-section__lead">
-              At Bella Tavola, we believe the best memories are made around a table.
-              Inspired by the warmth of Italian kitchens, our menu celebrates familiar
-              flavours, simple pleasures, and the joy of sharing one more bite.
-            </p>
-            <p className="story-section__copy">
-              From the first forkful of pasta to that last spoonful of tiramisù,
-              every dish is an invitation to slow down, stay a little longer, and
-              make room for good food and good company.
-            </p>
-
-            <div className="story-values">
-              <div className="story-value">
-                <span aria-hidden="true">✳</span>
-                <div><strong>Simple pleasures</strong><small>Comforting flavours, thoughtfully chosen.</small></div>
-              </div>
-              <div className="story-value">
-                <span aria-hidden="true">♡</span>
-                <div><strong>Made to be shared</strong><small>Because food tastes better together.</small></div>
-              </div>
-              <div className="story-value">
-                <span aria-hidden="true">☀</span>
-                <div><strong>A seat for everyone</strong><small>Come as you are. Leave a little happier.</small></div>
-              </div>
+            <p className="story-section__lead">Italian comfort food, fresh flavours, and a warm table made for sharing.</p>
+            <div className="story-values story-values--compact">
+              <span>Made with care</span><span>Best shared together</span><span>Always room for one more</span>
             </div>
 
             <a className="story-section__cta" href="#menu">Find your favourite <span aria-hidden="true">↗</span></a>
