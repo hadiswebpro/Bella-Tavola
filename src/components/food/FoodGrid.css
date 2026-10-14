@@ -1,0 +1,45 @@
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.food-grid__empty {
+  grid-column: 1 / -1;
+  padding: 64px 20px;
+  border: 1px dashed #d9c7b4;
+  border-radius: 18px;
+  color: #78695e;
+  text-align: center;
+}
+
+.food-grid__empty > span {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 2.5rem;
+}
+
+.food-grid__empty h3 {
+  margin: 0 0 8px;
+  color: #35271f;
+}
+
+@media (max-width: 1050px) {
+  .food-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .food-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 460px) {
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+}
