@@ -304,7 +304,7 @@ function App() {
                       setCheckoutError("Please enter your name.");
                       return;
                     }
-                    if (!/^[+()\\d\\s.-]{7,20}$/.test(customerPhone.trim())) {
+                    if (!/^[+()\d\s.-]{7,20}$/.test(customerPhone.trim())) {
                       setCheckoutError("Please enter a valid phone number.");
                       return;
                     }
