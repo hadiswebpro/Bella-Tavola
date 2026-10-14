@@ -152,29 +152,41 @@ function App() {
         <section className="hero-section" id="home">
           <div className="hero-section__content">
             <span className="eyebrow"><span aria-hidden="true">✦</span> A taste of Italy, made with love</span>
-            <h1>Good food.<br /><span>Good mood.</span></h1>
+            <h1>Gather around.<br /><span>Stay for the flavour.</span></h1>
             <p className="hero-section__description">
-              Gather around the table for Italian favourites, fresh ingredients,
-              and little moments worth savouring.
+              Handmade favourites, ingredients chosen with care, and the kind of
+              comfort that makes every table feel like home.
             </p>
-            <a className="primary-button" href="#menu">
-              Explore our menu <span aria-hidden="true">↗</span>
-            </a>
+            <div className="hero-section__actions">
+              <a className="primary-button" href="#menu">
+                Explore our menu <span aria-hidden="true">↗</span>
+              </a>
+              <a className="hero-secondary-button" href="#story">Our story <span aria-hidden="true">↗</span></a>
+            </div>
             <div className="hero-note">
               <span className="hero-note__stars" aria-label="Five stars">★★★★★</span>
               <span>Made fresh. Served with amore.</span>
             </div>
           </div>
 
-          <div className="hero-section__art" aria-label="Italian food illustration">
+          <div className="hero-section__art" aria-label="Freshly made Italian pizza">
             <div className="hero-sun" />
             <div className="hero-circle hero-circle--outer" />
             <div className="hero-circle hero-circle--inner" />
-            <div className="hero-food-emoji" aria-hidden="true">🍕</div>
-            <span className="floating-tag floating-tag--top">Freshly made</span>
+            <div className="hero-photo-frame">
+              <img
+                className="hero-food-photo"
+                src={foods.find((food) => food.id === "margherita-pizza")?.image ?? "/images/foods/margherita-pizza.webp"}
+                alt="Fresh Margherita pizza with tomato, mozzarella, and basil"
+                fetchPriority="high"
+              />
+              <span className="hero-photo-label"><span aria-hidden="true">✦</span> Straight from our kitchen</span>
+            </div>
+            <span className="floating-tag floating-tag--top"><span aria-hidden="true">✳</span> Freshly made</span>
             <span className="floating-tag floating-tag--bottom">Made with amore ♥</span>
             <span className="hero-leaf hero-leaf--one" aria-hidden="true">✳</span>
             <span className="hero-leaf hero-leaf--two" aria-hidden="true">✦</span>
+            <div className="hero-quality-note"><span aria-hidden="true">♡</span><span><strong>Good food, good company</strong><small>Always room at our table</small></span></div>
           </div>
           <div className="hero-section__bottom" aria-hidden="true">
             <span>FRESH INGREDIENTS</span><span>✳</span><span>ITALIAN SOUL</span><span>✳</span><span>MADE WITH AMORE</span>
