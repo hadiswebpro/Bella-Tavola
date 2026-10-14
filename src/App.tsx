@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import FoodGrid from "./components/food/FoodGrid";
 import { categories } from "./data/categories";
 import { foods } from "./data/foods";
@@ -10,11 +10,29 @@ type CartItem = { food: Food; quantity: number };
 function App() {
   const [activeCategory, setActiveCategory] = useState<FoodCategory | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    try {
+      const savedCart = window.localStorage.getItem("bella-tavola-cart");
+      if (!savedCart) return [];
+
+      const parsed: unknown = JSON.parse(savedCart);
+      return Array.isArray(parsed) ? (parsed as CartItem[]) : [];
+    } catch {
+      return [];
+    }
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [notice, setNotice] = useState("");
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const cartSubtotal = cartItems.reduce((total, item) => total + item.food.price * item.quantity, 0);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("bella-tavola-cart", JSON.stringify(cartItems));
+    } catch {
+      // The cart still works for this session if browser storage is unavailable.
+    }
+  }, [cartItems]);
 
   const visibleFoods = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -175,12 +193,41 @@ function App() {
       </main>
 
       <footer className="site-footer">
-        <a className="brand brand--footer" href="#home">
-          <span className="brand__mark" aria-hidden="true">B</span>
-          <span className="brand__text"><strong>Bella Tavola</strong><small>Italian kitchen</small></span>
-        </a>
-        <p>Made with amore. © {new Date().getFullYear()} Bella Tavola.</p>
-        <a href="#home" className="back-to-top">Back to top ↑</a>
+        <div className="site-footer__main">
+          <div className="site-footer__brand-column">
+            <a className="brand brand--footer" href="#home" aria-label="Bella Tavola home">
+              <span className="brand__mark" aria-hidden="true">B</span>
+              <span className="brand__text"><strong>Bella Tavola</strong><small>Italian kitchen</small></span>
+            </a>
+            <p className="site-footer__description">
+              A little taste of Italy, made with care. Gather around our table
+              for comforting classics and fresh-from-the-kitchen favourites.
+            </p>
+            <span className="site-footer__motto"><span aria-hidden="true">✳</span> Made with amore</span>
+          </div>
+
+          <div className="site-footer__column">
+            <h2>Explore</h2>
+            <a href="#home">Home</a>
+            <a href="#menu">Our menu</a>
+            <a href="#story">Our story</a>
+          </div>
+
+          <div className="site-footer__column">
+            <h2>From our kitchen</h2>
+            <p>Fresh ingredients</p>
+            <p>Italian-inspired favourites</p>
+            <p>Something for every craving</p>
+          </div>
+
+          <a href="#home" className="back-to-top" aria-label="Back to top">
+            <span aria-hidden="true">↑</span> Back to top
+          </a>
+        </div>
+        <div className="site-footer__bottom">
+          <p>© {new Date().getFullYear()} Bella Tavola. All rights reserved.</p>
+          <span>Buon appetito! <span aria-hidden="true">♥</span></span>
+        </div>
       </footer>
 
       {isCartOpen && (
