@@ -3,13 +3,18 @@ import FoodGrid from "./components/food/FoodGrid";
 import { categories } from "./data/categories";
 import { foods } from "./data/foods";
 import type { Food, FoodCategory } from "./types/food";
+
+type CartItem = { food: Food; quantity: number };
 import "./App.css";
 
 function App() {
   const [activeCategory, setActiveCategory] = useState<FoodCategory | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [cartCount, setCartCount] = useState(0);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [notice, setNotice] = useState("");
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const cartSubtotal = cartItems.reduce((total, item) => total + item.food.price * item.quantity, 0);
 
   const visibleFoods = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -27,9 +32,37 @@ function App() {
   }, [activeCategory, searchQuery]);
 
   function handleAddToCart(food: Food) {
-    setCartCount((count) => count + 1);
+    setCartItems((items) => {
+      const existingItem = items.find((item) => item.food.id === food.id);
+
+      if (existingItem) {
+        return items.map((item) =>
+          item.food.id === food.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      }
+
+      return [...items, { food, quantity: 1 }];
+    });
     setNotice(`${food.name} added to your cart`);
     window.setTimeout(() => setNotice(""), 2500);
+  }
+
+  function changeQuantity(foodId: string, amount: number) {
+    setCartItems((items) =>
+      items
+        .map((item) =>
+          item.food.id === foodId
+            ? { ...item, quantity: item.quantity + amount }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  }
+
+  function removeFromCart(foodId: string) {
+    setCartItems((items) => items.filter((item) => item.food.id !== foodId));
   }
 
   return (
@@ -49,7 +82,7 @@ function App() {
           <a className="main-nav__link" href="#story">Our Story</a>
         </nav>
 
-        <button className="cart-button" type="button" aria-label={`Cart, ${cartCount} items`}>
+        <button className="cart-button" type="button" aria-label={`Cart, ${cartCount} items`} aria-expanded={isCartOpen} onClick={() => setIsCartOpen(true)}>
           <span aria-hidden="true">🛍</span>
           <span className="cart-button__label">Cart</span>
           <span className="cart-button__count">{cartCount}</span>
@@ -149,6 +182,104 @@ function App() {
         <p>Made with amore. © {new Date().getFullYear()} Bella Tavola.</p>
         <a href="#home" className="back-to-top">Back to top ↑</a>
       </footer>
+
+      {isCartOpen && (
+        <div
+          className="cart-overlay"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setIsCartOpen(false);
+          }}
+        >
+          <section
+            className="cart-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cart-title"
+          >
+            <div className="cart-drawer__header">
+              <div>
+                <span className="eyebrow">Something delicious</span>
+                <h2 id="cart-title">Your basket <span>({cartCount})</span></h2>
+              </div>
+              <button
+                className="cart-drawer__close"
+                type="button"
+                aria-label="Close basket"
+                onClick={() => setIsCartOpen(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            {cartItems.length === 0 ? (
+              <div className="cart-empty">
+                <span aria-hidden="true">🍝</span>
+                <h3>Your basket is looking a little empty</h3>
+                <p>Let’s find something delicious for you.</p>
+                <button
+                  className="primary-button"
+                  type="button"
+                  onClick={() => {
+                    setIsCartOpen(false);
+                    document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  Explore the menu <span aria-hidden="true">↗</span>
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="cart-items">
+                  {cartItems.map(({ food, quantity }) => (
+                    <article className="cart-item" key={food.id}>
+                      <img className="cart-item__image" src={food.image} alt={food.name} />
+                      <div className="cart-item__details">
+                        <h3>{food.name}</h3>
+                        <p className="cart-item__price">
+                          {(food.price * quantity).toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          })}
+                        </p>
+                        <div className="cart-item__actions">
+                          <div className="quantity-control" aria-label={`Quantity of ${food.name}`}>
+                            <button type="button" aria-label={`Remove one ${food.name}`} onClick={() => changeQuantity(food.id, -1)}>−</button>
+                            <span aria-live="polite">{quantity}</span>
+                            <button type="button" aria-label={`Add one ${food.name}`} onClick={() => changeQuantity(food.id, 1)}>+</button>
+                          </div>
+                          <button className="cart-item__remove" type="button" onClick={() => removeFromCart(food.id)}>Remove</button>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+
+                <div className="cart-summary">
+                  <div className="cart-summary__row">
+                    <span>Subtotal</span>
+                    <strong>{cartSubtotal.toLocaleString("en-US", { style: "currency", currency: "USD" })}</strong>
+                  </div>
+                  <p>Taxes and delivery are calculated at checkout.</p>
+                  <button
+                    className="cart-checkout"
+                    type="button"
+                    onClick={() => {
+                      setNotice("Checkout is the next step we’ll build together!");
+                      window.setTimeout(() => setNotice(""), 2500);
+                    }}
+                  >
+                    Continue to checkout <span aria-hidden="true">→</span>
+                  </button>
+                  <button className="cart-continue" type="button" onClick={() => setIsCartOpen(false)}>
+                    Continue browsing
+                  </button>
+                </div>
+              </>
+            )}
+          </section>
+        </div>
+      )}
 
       {notice && <div className="toast" role="status">{notice}</div>}
     </div>
