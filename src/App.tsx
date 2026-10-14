@@ -3,9 +3,9 @@ import FoodGrid from "./components/food/FoodGrid";
 import { categories } from "./data/categories";
 import { foods } from "./data/foods";
 import type { Food, FoodCategory } from "./types/food";
+import "./App.css";
 
 type CartItem = { food: Food; quantity: number };
-import "./App.css";
 
 function App() {
   const [activeCategory, setActiveCategory] = useState<FoodCategory | "all">("all");
