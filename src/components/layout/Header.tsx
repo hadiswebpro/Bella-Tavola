@@ -1,5 +1,5 @@
-interface HeaderProps { cartCount: number; isMiniCartOpen: boolean; onCartClick: () => void; }
-export default function Header({cartCount,isMiniCartOpen,onCartClick}:HeaderProps){return (<header className="site-header">
+type Props={cartCount:number;isMiniCartOpen:boolean;onCartClick:()=>void};
+export default function Header({cartCount,isMiniCartOpen,onCartClick}:Props){return (<header className="site-header">
         <a className="brand" href="#home" aria-label="Bella Tavola home">
           <span className="brand__mark" aria-hidden="true">B</span>
           <span className="brand__text">
