@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import FoodGrid from "./components/food/FoodGrid";
-import { categories } from "./data/categories";
+import Layout from "./components/layout/Layout";
+import SpecialOffers from "./components/home/SpecialOffers";
+import HomePage from "./pages/HomePage";
 import { foods } from "./data/foods";
 import type { Food, FoodCategory } from "./types/food";
 import "./App.css";
@@ -126,28 +127,7 @@ function App() {
 
   return (
     <div className="site-shell">
-      <header className="site-header">
-        <a className="brand" href="#home" aria-label="Bella Tavola home">
-          <span className="brand__mark" aria-hidden="true">B</span>
-          <span className="brand__text">
-            <strong>Bella Tavola</strong>
-            <small>Italian kitchen</small>
-          </span>
-        </a>
-
-        <nav className="main-nav" aria-label="Main navigation">
-          <a className="main-nav__link main-nav__link--active" href="#home">Home</a>
-          <a className="main-nav__link" href="#menu">Our Menu</a>
-          <a className="main-nav__link" href="#story">Our Story</a>
-        </nav>
-
-        <button className="cart-button" type="button" aria-label={`Cart, ${cartCount} items`} onClick={() => setIsMiniCartOpen((open) => !open)} aria-controls="mini-cart" aria-expanded={isMiniCartOpen}>
-          <span aria-hidden="true">🛍</span>
-          <span className="cart-button__label">Cart</span>
-          <span className="cart-button__count">{cartCount}</span>
-        </button>
-      </header>
-
+<Layout cartCount={cartCount} isMiniCartOpen={isMiniCartOpen} onCartClick={() => setIsMiniCartOpen(open => !open)}>
       {isMiniCartOpen && (
         <div className="mini-cart" id="mini-cart" role="region" aria-label="Quick basket preview">
           <div className="mini-cart__heading">
@@ -179,225 +159,10 @@ function App() {
         </div>
       )}
 
-      {isPromoVisible && <aside className="promo-banner" aria-label="Special offer">
-        <div className="promo-banner__inner">
-          <span className="promo-banner__sparkle" aria-hidden="true">✦</span>
-          <div className="promo-banner__message">
-            <span className="promo-banner__eyebrow">A little treat from us</span>
-            <p><strong>Take 10% off</strong> your food order with code <strong className="promo-banner__code">BELLA10</strong></p>
-          </div>
-          <button
-            className="promo-banner__button"
-            type="button"
-            onClick={async () => {
-              try {
-                await navigator.clipboard.writeText("BELLA10");
-                setNotice("Promo code BELLA10 copied!");
-              } catch {
-                setNotice("Use promo code BELLA10 at checkout.");
-              }
-              window.setTimeout(() => setNotice(""), 2500);
-            }}
-          >
-            Copy code <span aria-hidden="true">↗</span>
-          </button>
-          <button className="promo-banner__close" type="button" aria-label="Dismiss special offer" onClick={() => setIsPromoVisible(false)}>×</button>
-        </div>
-      </aside>}
-
-      <main>
-        <section className="hero-section" id="home">
-          <div className="hero-section__content">
-            <span className="eyebrow"><span aria-hidden="true">✦</span> A taste of Italy, made with love</span>
-            <h1>Gather around.<br /><span>Stay for the flavour.</span></h1>
-            <p className="hero-section__description">
-              Handmade favourites, ingredients chosen with care, and the kind of
-              comfort that makes every table feel like home.
-            </p>
-            <div className="hero-section__actions">
-              <a className="primary-button" href="#menu">
-                Explore our menu <span aria-hidden="true">↗</span>
-              </a>
-              <a className="hero-secondary-button" href="#story">Our story <span aria-hidden="true">↗</span></a>
-            </div>
-            <div className="hero-note">
-              <span className="hero-note__stars" aria-label="Five stars">★★★★★</span>
-              <span>Made fresh. Served with amore.</span>
-            </div>
-          </div>
-
-          <div className="hero-editorial" aria-label="Italian dishes from our kitchen">
-            <div className="hero-editorial__arch">
-              <img className="hero-editorial__main" src={foods.find((food) => food.id === "spaghetti-carbonara")?.image ?? ""} alt="A delicious plate of spaghetti carbonara" fetchPriority="high" />
-              <span className="hero-editorial__seal">BUON<br />APPETITO <span aria-hidden="true">✳</span></span>
-            </div>
-            <div className="hero-editorial__polaroid">
-              <img src={foods.find((food) => food.id === "tiramisu")?.image ?? ""} alt="Freshly prepared tiramisu" />
-              <span>A sweet little ending ♡</span>
-            </div>
-            <span className="hero-editorial__scribble" aria-hidden="true">✳</span>
-            <span className="hero-editorial__caption">FROM OUR TABLE TO YOURS — EST. WITH AMORE</span>
-          </div>
-          <div className="hero-section__bottom" aria-hidden="true">
-            <span>FRESH INGREDIENTS</span><span>✳</span><span>ITALIAN SOUL</span><span>✳</span><span>MADE WITH AMORE</span>
-          </div>
-        </section>
-
-        <section className="bestsellers-section" aria-labelledby="bestsellers-title">
-          <div className="bestsellers-heading">
-            <div>
-              <span className="eyebrow">Loved at first bite</span>
-              <h2 id="bestsellers-title">Our <span>best-loved</span> bites</h2>
-              <p>A few guest favourites we think you’re going to love, too.</p>
-            </div>
-            <a href="#menu" className="bestsellers-link">Explore the full menu <span aria-hidden="true">↗</span></a>
-          </div>
-
-          <div className="bestsellers-grid">
-            {["spaghetti-carbonara", "margherita-pizza", "tiramisu"].map((foodId, index) => {
-              const food = foods.find((item) => item.id === foodId);
-              if (!food) return null;
-
-              return (
-                <article className="bestseller-card" key={food.id} style={{ animationDelay: `${index * 120}ms` }}>
-                  <div className="bestseller-card__image-wrap">
-                    <img src={food.image} alt={food.name} loading="lazy" />
-                    <span className="bestseller-card__badge">{index === 0 ? "Guest favourite" : index === 1 ? "A timeless classic" : "A sweet ending"}</span>
-                    <span className="bestseller-card__number" aria-hidden="true">0{index + 1}</span>
-                  </div>
-                  <div className="bestseller-card__body">
-                    <div className="bestseller-card__meta">
-                      <span>★ {food.rating.toFixed(1)}</span>
-                      <span>{food.category.replace("-", " ")}</span>
-                    </div>
-                    <h3>{food.name}</h3>
-                    <p>{food.description}</p>
-                    <div className="bestseller-card__bottom">
-                      <strong>{food.price.toLocaleString("en-US", { style: "currency", currency: "USD" })}</strong>
-                      <button type="button" onClick={() => handleAddToCart(food)} aria-label={`Add ${food.name} to cart`}>
-                        Add to cart <span aria-hidden="true">+</span>
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="menu-section" id="menu">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">From our kitchen to your table</span>
-              <h2>A little taste of <span>Italy</span></h2>
-              <p>Find your new favourite, made fresh and full of flavour.</p>
-            </div>
-            <div className="menu-heading__stamp" aria-hidden="true">BUON<br />APPETITO!</div>
-          </div>
-
-          <div className="menu-tools">
-            <div className="category-list" aria-label="Filter food by category">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  className={`category-chip ${activeCategory === category.id ? "category-chip--active" : ""}`}
-                  type="button"
-                  aria-pressed={activeCategory === category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
-            <label className="search-box">
-              <span aria-hidden="true">⌕</span>
-              <span className="sr-only">Search dishes</span>
-              <input
-                type="search"
-                placeholder="Search dishes..."
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-              />
-            </label>
-          </div>
-
-          <div className="results-line">
-            <p><strong>{visibleFoods.length}</strong> delicious {visibleFoods.length === 1 ? "dish" : "dishes"} to explore</p>
-            <span>All prices in USD</span>
-          </div>
-
-          <FoodGrid foods={visibleFoods} onAddToCart={handleAddToCart} />
-        </section>
-
-        <section className="story-section" id="story" aria-labelledby="story-title">
-          <div className="story-section__visual" aria-hidden="true">
-            <div className="story-visual__halo"></div>
-            <div className="story-visual__plate"><span>Buon<br />appetito</span><span className="story-visual__leaf">✳</span></div>
-            <span className="story-visual__note story-visual__note--top">Fatto con amore</span>
-            <span className="story-visual__note story-visual__note--bottom">Gather • Share • Savour</span>
-            <span className="story-visual__spark story-visual__spark--one">✦</span>
-            <span className="story-visual__spark story-visual__spark--two">✧</span>
-          </div>
-
-          <div className="story-section__content">
-            <p className="eyebrow"><span aria-hidden="true">✳</span> La dolce vita — the sweet life</p>
-            <h2 id="story-title">More than a meal.<br />A place to <span>belong.</span></h2>
-            <p className="story-section__lead">Italian comfort food, fresh flavours, and a warm table made for sharing.</p>
-            <div className="story-values story-values--compact">
-              <span>Made with care</span><span>Best shared together</span><span>Always room for one more</span>
-            </div>
-
-            <a className="story-section__cta" href="#menu">Find your favourite <span aria-hidden="true">↗</span></a>
-          </div>
-        </section>
-      </main>
-
-      <footer className="site-footer">
-        <div className="site-footer__main">
-          <div className="site-footer__brand-column">
-            <a className="brand brand--footer" href="#home" aria-label="Bella Tavola home">
-              <span className="brand__mark" aria-hidden="true">B</span>
-              <span className="brand__text"><strong>Bella Tavola</strong><small>Italian kitchen</small></span>
-            </a>
-            <p className="site-footer__description">
-              A little taste of Italy, made with care. Gather around our table
-              for comforting classics and fresh-from-the-kitchen favourites.
-            </p>
-            <span className="site-footer__motto"><span aria-hidden="true">✳</span> Made with amore</span>
-          </div>
-
-          <div className="site-footer__column">
-            <h2>Explore</h2>
-            <a href="#home">Home</a>
-            <a href="#menu">Our menu</a>
-            <a href="#story">Our story</a>
-          </div>
-
-          <div className="site-footer__column">
-            <h2>From our kitchen</h2>
-            <p>Fresh ingredients</p>
-            <p>Italian-inspired favourites</p>
-            <p>Something for every craving</p>
-          </div>
-
-          <div className="site-footer__column site-footer__address">
-            <h2>Visit us</h2>
-            <p>123 Via Roma</p>
-            <p>Little Italy, New York, NY 10013</p>
-            <p className="site-footer__address-note">Demo address — replace before launch</p>
-          </div>
-
-          <a href="#home" className="back-to-top" aria-label="Back to top">
-            <span aria-hidden="true">↑</span> Back to top
-          </a>
-        </div>
-        <div className="site-footer__bottom">
-          <p>© {new Date().getFullYear()} Bella Tavola. All rights reserved.</p>
-          <span>Buon appetito! <span aria-hidden="true">♥</span></span>
-        </div>
-      </footer>
-
-      {isCartOpen && (
+      {isPromoVisible && <SpecialOffers onClose={() => setIsPromoVisible(false)} onNotice={(message) => {setNotice(message);window.setTimeout(() => setNotice(""),2500)}}/>}
+<HomePage activeCategory={activeCategory} onCategoryChange={setActiveCategory} searchQuery={searchQuery} onSearchChange={setSearchQuery} visibleFoods={visibleFoods} onAddToCart={handleAddToCart}/>
+</Layout>
+{isCartOpen && (
         <div
           className="cart-overlay"
           role="presentation"
