@@ -2,6 +2,7 @@ import FoodGrid from "../food/FoodGrid";
 import FoodFilters from "../food/FoodFilters";
 import FoodSearch from "../food/FoodSearch";
 import type { Food, FoodCategory } from "../../types/food";
+import "./CategorySection.css";
 type Props = {
   activeCategory: FoodCategory | "all";
   onCategoryChange: (v: FoodCategory | "all") => void;

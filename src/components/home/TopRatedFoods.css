@@ -1,0 +1,16 @@
+/* Styles for TopRatedFoods */
+@keyframes story-halo { 0%, 100% { transform: scale(.98) rotate(0); } 50% { transform: scale(1.03) rotate(4deg); } }
+
+@keyframes story-plate-float { 0%, 100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-10px) rotate(-4deg); } }
+
+@keyframes story-note-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+
+@keyframes story-sparkle { 0%, 100% { opacity: .55; scale: .85; } 50% { opacity: 1; scale: 1.12; } }
+
+@keyframes story-content-in { from { opacity: 0; translate: 0 15px; } to { opacity: 1; translate: 0 0; } }
+
+.story-section__lead { max-width: 420px; margin-bottom: 0; font-size: 14px; line-height: 1.75; }
+
+.story-values--compact { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 24px; }
+
+.story-values--compact > span { display: inline-flex; align-items: center; padding: 8px 11px; border: 1px solid #ded0bc; border-radius: 999px; background: rgb(255 250 241 / 72%); color: #536044; font-size: 10px; font-weight: 600; }

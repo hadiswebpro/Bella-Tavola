@@ -1,3 +1,4 @@
+import "./Header.css";
 type Props = {
   cartCount: number;
   isMiniCartOpen: boolean;

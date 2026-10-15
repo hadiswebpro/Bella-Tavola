@@ -1,3 +1,4 @@
+import "./TopRatedFoods.css";
 export default function TopRatedFoods() {
   return (
     <section className="story-section" id="story" aria-labelledby="story-title">

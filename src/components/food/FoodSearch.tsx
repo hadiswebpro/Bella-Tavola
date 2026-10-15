@@ -1,3 +1,4 @@
+import "./FoodSearch.css";
 type Props = { searchQuery: string; onSearchChange: (v: string) => void };
 export default function FoodSearch({ searchQuery, onSearchChange }: Props) {
   return (

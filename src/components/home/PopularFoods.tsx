@@ -1,5 +1,6 @@
 import { foods } from "../../data/foods";
 import type { Food } from "../../types/food";
+import "./PopularFoods.css";
 type Props = { onAddToCart: (food: Food) => void };
 export default function PopularFoods({ onAddToCart }: Props) {
   return (

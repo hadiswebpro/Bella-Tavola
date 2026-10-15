@@ -43,3 +43,6 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Component-specific rules moved from App.css */
+

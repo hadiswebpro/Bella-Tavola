@@ -9,6 +9,7 @@ import { foods } from "../../data/foods";
 import type { Food, FoodCategory } from "../../types/food";
 
 
+import "./CartExperience.css";
 export default function CartExperience() {
   const [activeCategory, setActiveCategory] = useState<FoodCategory | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");

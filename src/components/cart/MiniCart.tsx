@@ -1,4 +1,5 @@
 import type {CartItem} from "../../hooks/useCart";
+import "./MiniCart.css";
 type Props={isMiniCartOpen:boolean;cartItems:CartItem[];cartCount:number;cartSubtotal:number;changeQuantity:(id:string,amount:number)=>void;onClose:()=>void;onOpenCart:()=>void};
 export default function MiniCart({isMiniCartOpen,cartItems,cartCount,cartSubtotal,changeQuantity,onClose,onOpenCart}:Props){return (
         <div className="mini-cart" id="mini-cart" role="region" aria-label="Quick basket preview">

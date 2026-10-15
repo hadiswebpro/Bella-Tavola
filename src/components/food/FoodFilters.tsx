@@ -1,5 +1,6 @@
 import { categories } from "../../data/categories";
 import type { FoodCategory } from "../../types/food";
+import "./FoodFilters.css";
 type Props = {
   activeCategory: FoodCategory | "all";
   onCategoryChange: (v: FoodCategory | "all") => void;

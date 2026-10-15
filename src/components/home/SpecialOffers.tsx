@@ -1,3 +1,4 @@
+import "./SpecialOffers.css";
 type Props = { onClose: () => void; onNotice: (message: string) => void };
 export default function SpecialOffers({ onClose, onNotice }: Props) {
   return (
