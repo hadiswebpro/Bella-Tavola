@@ -1,7 +1,7 @@
 import type {CartItem} from "../../hooks/useCart";
 import "./MiniCart.css";
-type Props={isMiniCartOpen:boolean;cartItems:CartItem[];cartCount:number;cartSubtotal:number;changeQuantity:(id:string,amount:number)=>void;onClose:()=>void;onOpenCart:()=>void};
-export default function MiniCart({isMiniCartOpen,cartItems,cartCount,cartSubtotal,changeQuantity,onClose,onOpenCart}:Props){return (
+type Props={cartItems:CartItem[];cartCount:number;cartSubtotal:number;changeQuantity:(id:string,amount:number)=>void;onClose:()=>void;onOpenCart:()=>void};
+export default function MiniCart({cartItems,cartCount,cartSubtotal,changeQuantity,onClose,onOpenCart}:Props){return (
         <div className="mini-cart" id="mini-cart" role="region" aria-label="Quick basket preview">
           <div className="mini-cart__heading">
             <div><span className="eyebrow">Something delicious</span><h2>Your basket ({cartCount})</h2></div>
