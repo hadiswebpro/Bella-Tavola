@@ -1,75 +1,70 @@
-# React + TypeScript + Vite
+# 🍝 Bella Tavola
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**A little taste of Italy, made with amore.**
 
-Currently, two official plugins are available:
+Bella Tavola is a responsive, Italian-inspired restaurant website built with **React, TypeScript, and Vite**. Explore a delicious menu, discover customer favourites, and try a smooth demo ordering experience — all wrapped in a warm, food-first design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 🔴 [View Live Website](https://hadiswebpro.github.io/Bella-Tavola/)
 
-## React Compiler
+> **Note:** This is a portfolio/demo project, not a real restaurant or ordering service. No payments are processed and no real orders are submitted.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🍕 **Browse the menu** — explore dishes and filter by food category.
+- 🔎 **Instant search** — find dishes by name or description.
+- ⭐ **Featured favourites** — discover popular dishes and their ratings.
+- 🛒 **Interactive shopping cart** — add dishes, adjust quantities, remove items, and preview your basket.
+- 💾 **Persistent cart** — cart contents are saved in localStorage.
+- 🧾 **Demo checkout** — choose pickup or delivery, enter order details, and receive a demo confirmation.
+- 🎟️ **Promo code** — use `BELLA10` for 10% off the food subtotal; the promotional banner can be dismissed.
+- 🎨 **Responsive design** — warm Italian-inspired visuals, subtle animations, and mobile-friendly layouts.
+- ♿ **Thoughtful UX** — accessible labels and support for reduced-motion preferences.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Built With
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React 19
+- TypeScript
+- Vite
+- CSS
+- GitHub Actions & GitHub Pages
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Run Locally
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Make sure you have a recent version of Node.js and npm installed.
 
+```bash
+git clone https://github.com/hadiswebpro/Bella-Tavola.git
+cd Bella-Tavola
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Open the local URL printed by Vite in your terminal.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Other commands
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run lint      # Check code with ESLint
+npm run build     # Type-check and build for production
+npm run preview   # Preview the production build locally
 ```
+
+## 🧩 How It Works
+
+The app uses React state to manage menu filters, search, basket interactions, checkout fields, and the promotional offer. Cart data is stored in the browser's localStorage so items can remain in the basket after refreshing the page.
+
+The checkout flow is intentionally **demo-only**: totals, discounts, estimated taxes, and delivery fees are calculated on the client side. It does not connect to a payment processor or restaurant backend.
+
+## 🌐 Deployment
+
+Bella Tavola is deployed to **GitHub Pages** through a GitHub Actions workflow that builds the Vite application and publishes its `dist` output.
+
+**Live demo:** https://hadiswebpro.github.io/Bella-Tavola/
+
+## 👩‍💻 Author
+
+**Hadis** · [GitHub Profile](https://github.com/hadiswebpro)
+
+---
+
+*Made with care, and a little Italian flavour. ❤️*
