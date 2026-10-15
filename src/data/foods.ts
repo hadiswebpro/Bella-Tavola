@@ -157,7 +157,7 @@ export const foods: Food[] = [
     name: "Panna Cotta",
     description: "Silky vanilla cream dessert served with a berry coulis.",
     price: 6.5,
-    image: `${import.meta.env.BASE_URL}images/foods/panna-cotta.jpg`,
+    image: `${import.meta.env.BASE_URL}images/foods/Panna-cotta.jpg`,
     category: "dessert",
     rating: 4.6,
     reviewCount: 48,
