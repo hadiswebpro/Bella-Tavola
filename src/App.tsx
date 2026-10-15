@@ -59,6 +59,7 @@ function App() {
   const [appliedPromo, setAppliedPromo] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const [notice, setNotice] = useState("");
+  const [isPromoVisible, setIsPromoVisible] = useState(true);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const cartSubtotal = cartItems.reduce((total, item) => total + item.food.price * item.quantity, 0);
   const discountAmount = appliedPromo ? cartSubtotal * 0.1 : 0;
@@ -178,7 +179,7 @@ function App() {
         </div>
       )}
 
-      <aside className="promo-banner" aria-label="Special offer">
+      {isPromoVisible && <aside className="promo-banner" aria-label="Special offer">
         <div className="promo-banner__inner">
           <span className="promo-banner__sparkle" aria-hidden="true">✦</span>
           <div className="promo-banner__message">
@@ -200,8 +201,9 @@ function App() {
           >
             Copy code <span aria-hidden="true">↗</span>
           </button>
+          <button className="promo-banner__close" type="button" aria-label="Dismiss special offer" onClick={() => setIsPromoVisible(false)}>×</button>
         </div>
-      </aside>
+      </aside>}
 
       <main>
         <section className="hero-section" id="home">
@@ -224,24 +226,17 @@ function App() {
             </div>
           </div>
 
-          <div className="hero-section__art" aria-label="Freshly made Italian pizza">
-            <div className="hero-sun" />
-            <div className="hero-circle hero-circle--outer" />
-            <div className="hero-circle hero-circle--inner" />
-            <div className="hero-photo-frame">
-              <img
-                className="hero-food-photo"
-                src={foods.find((food) => food.id === "margherita-pizza")?.image ?? `${import.meta.env.BASE_URL}images/foods/margherita-pizza.webp`}
-                alt="Fresh Margherita pizza with tomato, mozzarella, and basil"
-                fetchPriority="high"
-              />
-              <span className="hero-photo-label"><span aria-hidden="true">✦</span> Straight from our kitchen</span>
+          <div className="hero-editorial" aria-label="Italian dishes from our kitchen">
+            <div className="hero-editorial__arch">
+              <img className="hero-editorial__main" src={foods.find((food) => food.id === "spaghetti-carbonara")?.image ?? ""} alt="A delicious plate of spaghetti carbonara" fetchPriority="high" />
+              <span className="hero-editorial__seal">BUON<br />APPETITO <span aria-hidden="true">✳</span></span>
             </div>
-            <span className="floating-tag floating-tag--top"><span aria-hidden="true">✳</span> Freshly made</span>
-            <span className="floating-tag floating-tag--bottom">Made with amore ♥</span>
-            <span className="hero-leaf hero-leaf--one" aria-hidden="true">✳</span>
-            <span className="hero-leaf hero-leaf--two" aria-hidden="true">✦</span>
-            <div className="hero-quality-note"><span aria-hidden="true">♡</span><span><strong>Good food, good company</strong><small>Always room at our table</small></span></div>
+            <div className="hero-editorial__polaroid">
+              <img src={foods.find((food) => food.id === "tiramisu")?.image ?? ""} alt="Freshly prepared tiramisu" />
+              <span>A sweet little ending ♡</span>
+            </div>
+            <span className="hero-editorial__scribble" aria-hidden="true">✳</span>
+            <span className="hero-editorial__caption">FROM OUR TABLE TO YOURS — EST. WITH AMORE</span>
           </div>
           <div className="hero-section__bottom" aria-hidden="true">
             <span>FRESH INGREDIENTS</span><span>✳</span><span>ITALIAN SOUL</span><span>✳</span><span>MADE WITH AMORE</span>
