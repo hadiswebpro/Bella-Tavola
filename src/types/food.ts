@@ -12,7 +12,7 @@ export interface Food {
   name: string;
   description: string;
   price: number;
-  /** Path relative to public, e.g. /images/foods/tiramisu.webp */
+  /** Path relative to public, e.g. /images/foods/tiramisu.jpg */
   image: string;
   category: FoodCategory;
   rating: number;
