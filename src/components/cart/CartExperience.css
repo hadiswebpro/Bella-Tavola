@@ -1,11 +1,23 @@
 /* Site feedback and toast styles */
 .toast {
- position: fixed; right: 24px; bottom: 24px; z-index: 10; max-width: calc(100% - 48px); padding: 14px 18px; border-radius: 12px; background: var(--green); color: #fff; box-shadow: 0 10px 30px rgb(53 39 31 / 18%); font-size: 13px; 
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 10;
+    max-width: calc(100% - 48px);
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: var(--green);
+    color: #fff;
+    box-shadow: 0 10px 30px rgb(53 39 31 / 18%);
+    font-size: 13px;
 }
 
 @media (max-width: 600px) {
-.toast {
- right: 12px; bottom: 12px; max-width: calc(100% - 24px); 
-}
+    .toast {
+        right: 12px;
+        bottom: 12px;
+        max-width: calc(100% - 24px);
+    }
 
 }

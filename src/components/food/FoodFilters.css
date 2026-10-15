@@ -1,31 +1,44 @@
 /* Category filter styles */
 .category-list {
- display: flex; flex-wrap: wrap; gap: 8px; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .category-chip {
- padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; background: #fffdf9; color: #74665a; font-size: 11px; font-weight: 600; transition: all .18s; 
+    padding: 9px 13px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fffdf9;
+    color: #74665a;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all .18s;
 }
 
 .category-chip:hover {
- border-color: var(--orange); color: var(--orange-dark); 
+    border-color: var(--orange);
+    color: var(--orange-dark);
 }
 
 .category-chip--active {
- border-color: var(--green); background: var(--green); color: white; 
+    border-color: var(--green);
+    background: var(--green);
+    color: white;
 }
 
 .category-chip--active:hover {
- color: white; 
+    color: white;
 }
 
 @media (max-width: 600px) {
-.category-list {
- gap: 7px; 
-}
+    .category-list {
+        gap: 7px;
+    }
 
-.category-chip {
- padding: 8px 11px; font-size: 10px; 
-}
+    .category-chip {
+        padding: 8px 11px;
+        font-size: 10px;
+    }
 
 }

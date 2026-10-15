@@ -95,7 +95,7 @@
   font-weight: 700;
 }
 
-.food-card__rating > span:first-child {
+.food-card__rating>span:first-child {
   color: #e5a91c;
 }
 
@@ -197,6 +197,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .food-card,
   .food-card__image,
   .food-card__add-button {
@@ -205,4 +206,3 @@
 }
 
 /* Component-specific rules moved from App.css */
-

@@ -1,96 +1,148 @@
 /* Header and navigation styles */
 .site-header {
 
-  width: min(1200px, calc(100% - 64px)); height: 88px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between; gap: 28px;
+  width: min(1200px, calc(100% - 64px));
+  height: 88px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
 
 }
 
 .brand {
- display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; 
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
 }
 
 .brand__mark {
 
-  display: grid; place-items: center; width: 43px; height: 43px; border-radius: 50%;
-  background: var(--orange); color: white; font-family: "Playfair Display", serif;
-  font-size: 27px; font-weight: 700; font-style: italic;
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-size: 27px;
+  font-weight: 700;
+  font-style: italic;
 
 }
 
 .brand__text {
- display: flex; flex-direction: column; line-height: 1.2; 
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .brand__text strong {
- font-family: "Playfair Display", serif; font-size: 20px; letter-spacing: -.5px; 
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  letter-spacing: -.5px;
 }
 
 .brand__text small {
- margin-top: 4px; color: var(--muted); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; 
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .main-nav {
- display: flex; align-items: center; gap: 35px; 
+  display: flex;
+  align-items: center;
+  gap: 35px;
 }
 
 .main-nav__link {
- color: #74665a; font-size: 13px; font-weight: 600; transition: color .2s; 
+  color: #74665a;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color .2s;
 }
 
-.main-nav__link:hover, .main-nav__link--active {
- color: var(--orange-dark); 
+.main-nav__link:hover,
+.main-nav__link--active {
+  color: var(--orange-dark);
 }
 
 .cart-button {
 
-  display: flex; align-items: center; gap: 9px; padding: 10px 13px; border: 1px solid var(--line);
-  border-radius: 12px; background: var(--paper); color: var(--ink); font-size: 13px; font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
 
 }
 
 .cart-button__count {
- display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--green); color: white; font-size: 11px; 
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  font-size: 11px;
 }
 
 @media (max-width: 600px) {
-.site-header {
- width: calc(100% - 32px); height: 74px; gap: 10px; 
+  .site-header {
+    width: calc(100% - 32px);
+    height: 74px;
+    gap: 10px;
+  }
+
+  .brand__mark {
+    width: 37px;
+    height: 37px;
+    font-size: 23px;
+  }
+
+  .brand__text strong {
+    font-size: 17px;
+  }
+
+  .brand__text small {
+    font-size: 8px;
+    letter-spacing: 1.4px;
+  }
+
+  .main-nav {
+    gap: 13px;
+  }
+
+  .main-nav__link {
+    font-size: 10px;
+  }
+
+  .main-nav__link:last-child {
+    display: none;
+  }
+
+  .cart-button {
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .cart-button__label {
+    display: none;
+  }
+
 }
 
-.brand__mark {
- width: 37px; height: 37px; font-size: 23px; 
-}
-
-.brand__text strong {
- font-size: 17px; 
-}
-
-.brand__text small {
- font-size: 8px; letter-spacing: 1.4px; 
-}
-
-.main-nav {
- gap: 13px; 
-}
-
-.main-nav__link {
- font-size: 10px; 
-}
-
-.main-nav__link:last-child {
- display: none; 
-}
-
-.cart-button {
- gap: 5px; padding: 8px; 
-}
-
-.cart-button__label {
- display: none; 
-}
-
-}
 .site-header {
 
   position: sticky;
@@ -108,7 +160,7 @@
 }
 
 .brand {
- gap: 12px; 
+  gap: 12px;
 }
 
 .brand__mark {
@@ -139,11 +191,12 @@
 }
 
 .main-nav__link:hover {
- background: #f8ead7; 
+  background: #f8ead7;
 }
 
 .main-nav__link--active {
- background: #f8ead7; color: var(--orange-dark); 
+  background: #f8ead7;
+  color: var(--orange-dark);
 }
 
 .cart-button {
@@ -166,5 +219,6 @@
 }
 
 .cart-button__count {
- width: 26px; height: 26px; 
+  width: 26px;
+  height: 26px;
 }

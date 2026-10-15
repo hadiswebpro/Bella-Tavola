@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-.food-grid__empty > span {
+.food-grid__empty>span {
   display: block;
   margin-bottom: 12px;
   font-size: 2.5rem;
@@ -45,4 +45,3 @@
 }
 
 /* Component-specific rules moved from App.css */
-
