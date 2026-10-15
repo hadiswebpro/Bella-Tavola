@@ -1,2 +1,131 @@
-/* Styles for Footer */
+/* A clearer, multi-column footer */
+.site-footer {
+  display: block;
+  width: 100%;
+  min-height: 0;
+  padding: 0 max(32px, calc((100% - 1200px) / 2));
+  background: #30271f;
+  color: #fdf5e9;
+}
+.site-footer__main {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.35fr) minmax(90px, .55fr) minmax(155px, .85fr) minmax(170px, .9fr) auto;
+  align-items: start;
+  gap: clamp(24px, 4vw, 58px);
+  padding: 56px 0 44px;
+}
+.brand--footer .brand__mark {
+  background: var(--orange);
+  box-shadow: none;
+}
+.brand--footer .brand__text strong { color: #fff8ee; }
+.brand--footer .brand__text small { color: #d5c1ab; }
+.site-footer__description {
+  max-width: 320px;
+  margin: 20px 0 16px;
+  color: #cbb9a6;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.site-footer__motto {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #f3c64e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .4px;
+}
+.site-footer__column { display: flex; flex-direction: column; align-items: flex-start; gap: 13px; }
+.site-footer__column h2 {
+  margin: 5px 0 6px;
+  color: #fff8ee;
+  font-family: "Playfair Display", serif;
+  font-size: 17px;
+  font-weight: 600;
+}
+.site-footer__column a, .site-footer__column p {
+  margin: 0;
+  color: #cbb9a6;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.site-footer__address-note {
+  margin-top: 3px !important;
+  color: #a99681 !important;
+  font-size: 9px !important;
+  font-style: italic;
+}
+.site-footer__column a { transition: color .2s ease, transform .2s ease; }
+.site-footer__column a:hover { color: #f3c64e; transform: translateX(3px); }
+.site-footer .back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border: 1px solid rgb(255 248 238 / 18%);
+  border-radius: 999px;
+  color: #fdf5e9;
+  white-space: nowrap;
+  transition: border-color .2s ease, background .2s ease;
+}
+.site-footer .back-to-top span { color: #f3c64e; font-size: 16px; }
+.site-footer .back-to-top:hover { border-color: #f3c64e; background: rgb(255 255 255 / 5%); color: white; }
+.site-footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 62px;
+  border-top: 1px solid rgb(255 248 238 / 13%);
+}
+.site-footer__bottom p, .site-footer__bottom > span {
+  margin: 0;
+  color: #bda995;
+  font-size: 10px;
+}
+.site-footer__bottom > span span { color: var(--orange); }
 
+@media (max-width: 900px) {
+  .site-header { width: 100%; padding-inline: 20px; }
+  .main-nav { gap: 2px; }
+  .main-nav__link { padding: 10px 12px; }
+  .site-footer { width: 100%; padding-inline: 28px; }
+  .site-footer__main {
+    grid-template-columns: minmax(200px, 1.3fr) minmax(90px, .6fr) minmax(145px, .9fr) minmax(160px, 1fr);
+    gap: 24px;
+  }
+  .site-footer .back-to-top { grid-column: 2 / -1; justify-self: start; }
+}
+@media (max-width: 600px) {
+  .site-header {
+    width: 100%;
+    height: 72px;
+    padding-inline: 16px;
+    gap: 8px;
+  }
+  .brand { gap: 8px; }
+  .brand__mark { width: 35px; height: 35px; font-size: 21px; }
+  .brand__text strong { font-size: 15px; }
+  .brand__text small { font-size: 7px; letter-spacing: 1px; }
+  .main-nav { gap: 0; padding: 3px; }
+  .main-nav__link { padding: 9px 10px; font-size: 10px; }
+  .main-nav__link:last-child { display: none; }
+  .cart-button { min-height: 39px; padding: 5px 6px; gap: 4px; }
+  .cart-button__count { width: 23px; height: 23px; }
+  .site-footer { width: 100%; padding-inline: 22px; }
+  .site-footer__main {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 22px;
+    padding: 40px 0 32px;
+  }
+  .site-footer__brand-column { grid-column: 1 / -1; }
+  .site-footer__description { max-width: 360px; margin-top: 16px; }
+  .site-footer__column h2 { font-size: 16px; }
+  .site-footer .back-to-top { grid-column: 1 / -1; }
+  .site-footer__bottom { align-items: flex-start; flex-direction: column; justify-content: center; gap: 7px; padding: 16px 0; }
+}
+@media (max-width: 360px) {
+  .main-nav__link { padding-inline: 7px; font-size: 9px; }
+  .brand__text strong { font-size: 14px; }
+}

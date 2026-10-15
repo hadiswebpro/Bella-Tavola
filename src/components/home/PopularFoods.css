@@ -1,12 +1,88 @@
-/* Styles for PopularFoods */
+/* Featured bestsellers */
+.bestsellers-section {
+  width: min(1200px, calc(100% - 64px));
+  margin: 0 auto;
+  padding: 62px 0 72px;
+}
+.bestsellers-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+.bestsellers-heading h2 {
+  margin: 9px 0 8px;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 500;
+  letter-spacing: -1.1px;
+}
+.bestsellers-heading h2 span { color: var(--orange-dark); font-style: italic; }
+.bestsellers-heading p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.bestsellers-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-bottom: 5px;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.bestsellers-link span { transition: transform .2s ease; }
+.bestsellers-link:hover span { transform: translate(3px, -3px); }
+.bestsellers-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.bestseller-card {
+  overflow: hidden;
+  border: 1px solid #eee2d3;
+  border-radius: 17px;
+  background: #fffdf9;
+  box-shadow: 0 8px 24px rgb(57 40 25 / 4%);
+  animation: bestseller-rise .65s both;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.bestseller-card:hover { transform: translateY(-6px); box-shadow: 0 17px 34px rgb(57 40 25 / 10%); }
+.bestseller-card__image-wrap { position: relative; overflow: hidden; height: 220px; background: #f1e4d3; }
+.bestseller-card__image-wrap::after { position: absolute; inset: 45% 0 0; background: linear-gradient(transparent, rgb(34 25 18 / 30%)); content: ""; pointer-events: none; }
+.bestseller-card__image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .65s cubic-bezier(.2,.7,.2,1); }
+.bestseller-card:hover .bestseller-card__image-wrap img { transform: scale(1.06); }
+.bestseller-card__badge {
+  position: absolute;
+  z-index: 1;
+  top: 14px;
+  left: 14px;
+  padding: 7px 10px;
+  border: 1px solid rgb(255 255 255 / 50%);
+  border-radius: 999px;
+  background: rgb(255 250 242 / 93%);
+  color: #4a4933;
+  font-size: 9px;
+  font-weight: 700;
+}
+.bestseller-card__number { position: absolute; z-index: 1; right: 15px; bottom: 11px; color: white; font-family: "Playfair Display", serif; font-size: 31px; font-style: italic; }
+.bestseller-card__body { padding: 19px 20px 18px; }
+.bestseller-card__meta { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 9px; text-transform: capitalize; }
+.bestseller-card__meta span:first-child { color: #a66b18; font-weight: 700; }
+.bestseller-card h3 { margin: 11px 0 8px; font-family: "Playfair Display", serif; font-size: 20px; font-weight: 600; }
+.bestseller-card__body > p { min-height: 42px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+.bestseller-card__bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 17px; padding-top: 15px; border-top: 1px solid #f0e6d9; }
+.bestseller-card__bottom > strong { color: var(--orange-dark); font-size: 15px; }
+.bestseller-card__bottom button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 9px;
+  background: #3b4a35;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  transition: background .2s ease, transform .2s ease;
+}
+.bestseller-card__bottom button span { font-size: 16px; }
+.bestseller-card__bottom button:hover { transform: translateY(-1px); background: var(--orange-dark); }
 @keyframes bestseller-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-
-.bestseller-card__bottom button { transition: transform .22s, box-shadow .22s, background .22s; }
-
-.bestseller-card__bottom button:hover { transform:translateY(-3px); box-shadow:0 12px 28px #c34b3330; }
-
-.bestseller-card__image-wrap img { transition:transform .6s cubic-bezier(.2,.7,.2,1); }
-
-.bestseller-card:hover .bestseller-card__image-wrap img { transform:scale(1.055); }
-
-.bestsellers-heading .eyebrow::before { content:"✳"; color:#d85b31; display:inline-block; margin-right:6px; animation:bella-spin 16s linear infinite; }
