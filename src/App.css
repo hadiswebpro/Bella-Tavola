@@ -1072,3 +1072,33 @@ button { cursor: pointer; }
   .story-values--compact > span { padding: 8px 9px; font-size: 9px; }
 }
 @media (prefers-reduced-motion: reduce) { .mini-cart { animation: none; } }
+
+
+/* Editorial Italian kitchen refresh */
+.hero-section { background: radial-gradient(circle at 82% 30%, #ffcf9c 0, transparent 43%), linear-gradient(125deg,#fff0df 0%,#ffe1c7 100%); isolation:isolate; }
+.hero-section::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:.16; background-image: radial-gradient(#b85032 0.7px,transparent 0.7px); background-size:17px 17px; }
+.hero-section__content { animation: bella-rise .8s both; }
+.hero-section h1 span { color:#b93e29; }
+.hero-editorial { position:relative; min-height:390px; display:grid; place-items:center; isolation:isolate; }
+.hero-editorial__arch { position:relative; width:min(85%,345px); aspect-ratio: .82; border-radius: 49% 49% 18px 18px; padding:10px; background:#fff7eb; box-shadow:0 22px 55px #8d3c2530; transform:rotate(4deg); animation:bella-rise .9s .15s both; }
+.hero-editorial__main { width:100%; height:100%; object-fit:cover; border-radius:49% 49% 12px 12px; }
+.hero-editorial__seal { position:absolute; top:7%; left:-15%; display:grid; place-items:center; width:98px; height:98px; border-radius:50%; background:#c54c2f; color:#fff8eb; font-size:12px; font-weight:800; text-align:center; line-height:1.3; letter-spacing:1px; transform:rotate(-16deg); box-shadow:0 10px 20px #9b3d2540; }
+.hero-editorial__seal span { font-size:23px; }
+.hero-editorial__polaroid { position:absolute; right:-3%; bottom:-4%; width:39%; padding:7px 7px 13px; background:#fffdf8; box-shadow:0 12px 30px #743a2933; transform:rotate(-11deg); animation:bella-rise .9s .3s both; }
+.hero-editorial__polaroid img { display:block; width:100%; aspect-ratio:1; object-fit:cover; }
+.hero-editorial__polaroid span { display:block; margin-top:7px; color:#a64c34; font-family:"Playfair Display",serif; font-style:italic; font-size:clamp(9px,1vw,13px); text-align:center; }
+.hero-editorial__scribble { position:absolute; top:0; right:0; color:#e57535; font-size:64px; animation:bella-spin 24s linear infinite; }
+.hero-editorial__caption { position:absolute; left:0; bottom:-5%; color:#a55336; font-size:9px; font-weight:800; letter-spacing:2px; transform:rotate(-6deg); }
+.promo-banner__inner { position:relative; padding-right:42px; }
+.promo-banner__close { position:absolute; top:50%; right:4px; transform:translateY(-50%); display:grid; place-items:center; width:30px; height:30px; border:1px solid currentColor; border-radius:50%; background:transparent; color:inherit; font-size:23px; line-height:1; opacity:.8; transition:background .2s,opacity .2s; }
+.promo-banner__close:hover { background:#ffffff26; opacity:1; }
+.primary-button, .cart-checkout, .bestseller-card__bottom button { transition: transform .22s, box-shadow .22s, background .22s; }
+.primary-button:hover, .cart-checkout:hover, .bestseller-card__bottom button:hover { transform:translateY(-3px); box-shadow:0 12px 28px #c34b3330; }
+.bestseller-card__image-wrap img, .food-card img { transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+.bestseller-card:hover .bestseller-card__image-wrap img, .food-card:hover img { transform:scale(1.055); }
+.section-heading .eyebrow::before, .bestsellers-heading .eyebrow::before { content:"✳"; color:#d85b31; display:inline-block; margin-right:6px; animation:bella-spin 16s linear infinite; }
+@keyframes bella-rise { from {opacity:0;transform:translateY(18px)} to {opacity:1;transform:translateY(0)} }
+@keyframes bella-spin { to {rotate:360deg} }
+@media(max-width:900px){.hero-editorial{min-height:310px}.hero-editorial__arch{width:90%}.hero-editorial__seal{width:75px;height:75px;font-size:9px}}
+@media(max-width:600px){.hero-editorial{min-height:300px;margin:10px 12px 25px}.hero-editorial__arch{width:min(73%,275px)}.hero-editorial__polaroid{right:0;bottom:0;width:36%}.hero-editorial__caption{bottom:-18px;font-size:7px}.hero-editorial__scribble{font-size:42px}.promo-banner__inner{padding-right:37px}.promo-banner__close{right:0}}
+@media(prefers-reduced-motion:reduce){.hero-section__content,.hero-editorial__arch,.hero-editorial__polaroid,.hero-editorial__scribble,.section-heading .eyebrow::before,.bestsellers-heading .eyebrow::before{animation:none!important}}
