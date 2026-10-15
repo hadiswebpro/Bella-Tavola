@@ -1,4 +1,3 @@
-import { foods } from "../../data/foods";
 export default function Hero() {
   return (
     <section className="hero-section" id="home">
@@ -38,10 +37,7 @@ export default function Hero() {
         <div className="hero-editorial__arch">
           <img
             className="hero-editorial__main"
-            src={
-              foods.find((food) => food.id === "spaghetti-carbonara")?.image ??
-              ""
-            }
+            src={`${import.meta.env.BASE_URL}images/hero-large.jpg`}
             alt="A delicious plate of spaghetti carbonara"
             fetchPriority="high"
           />
@@ -53,7 +49,7 @@ export default function Hero() {
         </div>
         <div className="hero-editorial__polaroid">
           <img
-            src={foods.find((food) => food.id === "tiramisu")?.image ?? ""}
+            src={`${import.meta.env.BASE_URL}images/hero-small.jpg`}
             alt="Freshly prepared tiramisu"
           />
           <span>A sweet little ending ♡</span>
