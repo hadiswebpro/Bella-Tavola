@@ -49,9 +49,14 @@ function FoodCard({ food, onAddToCart }: FoodCardProps) {
           <span className="food-card__category">
             {food.category.replace("-", " ")}
           </span>
-          <span className="food-card__rating" aria-label={`Rated ${food.rating} out of 5`}>
+          <span
+            className="food-card__rating"
+            aria-label={`Rated ${food.rating} out of 5`}
+          >
             <span aria-hidden="true">★</span> {food.rating.toFixed(1)}
-            <span className="food-card__review-count">({food.reviewCount})</span>
+            <span className="food-card__review-count">
+              ({food.reviewCount})
+            </span>
           </span>
         </div>
 

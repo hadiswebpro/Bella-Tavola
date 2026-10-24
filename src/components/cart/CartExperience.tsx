@@ -8,12 +8,21 @@ import HomePage from "../../pages/HomePage";
 import { foods } from "../../data/foods";
 import type { Food, FoodCategory } from "../../types/food";
 
-
 import "./CartExperience.css";
 export default function CartExperience() {
-  const [activeCategory, setActiveCategory] = useState<FoodCategory | "all">("all");
+  const [activeCategory, setActiveCategory] = useState<FoodCategory | "all">(
+    "all",
+  );
   const [searchQuery, setSearchQuery] = useState("");
-  const {cartItems,setCartItems,cartCount,cartSubtotal,addToCart,changeQuantity,removeFromCart}=useCart();
+  const {
+    cartItems,
+    setCartItems,
+    cartCount,
+    cartSubtotal,
+    addToCart,
+    changeQuantity,
+    removeFromCart,
+  } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -31,7 +40,8 @@ export default function CartExperience() {
   const [notice, setNotice] = useState("");
   const [isPromoVisible, setIsPromoVisible] = useState(true);
   const discountAmount = appliedPromo ? cartSubtotal * 0.1 : 0;
-  const deliveryFee = orderType === "delivery" && cartItems.length > 0 ? 4.99 : 0;
+  const deliveryFee =
+    orderType === "delivery" && cartItems.length > 0 ? 4.99 : 0;
   const estimatedTax = Math.max(0, cartSubtotal - discountAmount) * 0.08;
   const orderTotal = cartSubtotal - discountAmount + deliveryFee + estimatedTax;
 
@@ -48,7 +58,7 @@ export default function CartExperience() {
 
       return matchesCategory && matchesSearch;
     });
-  }, [activeCategory, searchQuery]);
+  }, [foods, activeCategory, searchQuery]);
 
   function handleAddToCart(food: Food) {
     addToCart(food);
@@ -58,15 +68,88 @@ export default function CartExperience() {
 
   return (
     <div className="site-shell">
-<Layout cartCount={cartCount} isMiniCartOpen={isMiniCartOpen} onCartClick={() => setIsMiniCartOpen(open => !open)}>
-      {isMiniCartOpen && <MiniCart cartItems={cartItems} cartCount={cartCount} cartSubtotal={cartSubtotal} changeQuantity={changeQuantity} onClose={() => setIsMiniCartOpen(false)} onOpenCart={() => {setIsMiniCartOpen(false);setIsCartOpen(true);}} />}
+      <Layout
+        cartCount={cartCount}
+        isMiniCartOpen={isMiniCartOpen}
+        onCartClick={() => setIsMiniCartOpen((open) => !open)}
+      >
+        {isMiniCartOpen && (
+          <MiniCart
+            cartItems={cartItems}
+            cartCount={cartCount}
+            cartSubtotal={cartSubtotal}
+            changeQuantity={changeQuantity}
+            onClose={() => setIsMiniCartOpen(false)}
+            onOpenCart={() => {
+              setIsMiniCartOpen(false);
+              setIsCartOpen(true);
+            }}
+          />
+        )}
 
-      {isPromoVisible && <SpecialOffers onClose={() => setIsPromoVisible(false)} onNotice={(message) => {setNotice(message);window.setTimeout(() => setNotice(""),2500)}}/>}
-<HomePage activeCategory={activeCategory} onCategoryChange={setActiveCategory} searchQuery={searchQuery} onSearchChange={setSearchQuery} visibleFoods={visibleFoods} onAddToCart={handleAddToCart}/>
-</Layout>
-{isCartOpen && <CartDrawer setIsCartOpen={setIsCartOpen} cartItems={cartItems} setCartItems={setCartItems} cartCount={cartCount} cartSubtotal={cartSubtotal} changeQuantity={changeQuantity} removeFromCart={removeFromCart} isCheckingOut={isCheckingOut} setIsCheckingOut={setIsCheckingOut} orderPlaced={orderPlaced} setOrderPlaced={setOrderPlaced} orderNumber={orderNumber} setOrderNumber={setOrderNumber} placedOrderTotal={placedOrderTotal} setPlacedOrderTotal={setPlacedOrderTotal} customerName={customerName} setCustomerName={setCustomerName} customerPhone={customerPhone} setCustomerPhone={setCustomerPhone} orderType={orderType} setOrderType={setOrderType} deliveryAddress={deliveryAddress} setDeliveryAddress={setDeliveryAddress} orderNotes={orderNotes} setOrderNotes={setOrderNotes} promoCode={promoCode} setPromoCode={setPromoCode} appliedPromo={appliedPromo} setAppliedPromo={setAppliedPromo} checkoutError={checkoutError} setCheckoutError={setCheckoutError} discountAmount={discountAmount} deliveryFee={deliveryFee} estimatedTax={estimatedTax} orderTotal={orderTotal}/>}
+        {isPromoVisible && (
+          <SpecialOffers
+            onClose={() => setIsPromoVisible(false)}
+            onNotice={(message) => {
+              setNotice(message);
+              window.setTimeout(() => setNotice(""), 2500);
+            }}
+          />
+        )}
+        <HomePage
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          visibleFoods={visibleFoods}
+          onAddToCart={handleAddToCart}
+        />
+      </Layout>
+      {isCartOpen && (
+        <CartDrawer
+          setIsCartOpen={setIsCartOpen}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+          cartCount={cartCount}
+          cartSubtotal={cartSubtotal}
+          changeQuantity={changeQuantity}
+          removeFromCart={removeFromCart}
+          isCheckingOut={isCheckingOut}
+          setIsCheckingOut={setIsCheckingOut}
+          orderPlaced={orderPlaced}
+          setOrderPlaced={setOrderPlaced}
+          orderNumber={orderNumber}
+          setOrderNumber={setOrderNumber}
+          placedOrderTotal={placedOrderTotal}
+          setPlacedOrderTotal={setPlacedOrderTotal}
+          customerName={customerName}
+          setCustomerName={setCustomerName}
+          customerPhone={customerPhone}
+          setCustomerPhone={setCustomerPhone}
+          orderType={orderType}
+          setOrderType={setOrderType}
+          deliveryAddress={deliveryAddress}
+          setDeliveryAddress={setDeliveryAddress}
+          orderNotes={orderNotes}
+          setOrderNotes={setOrderNotes}
+          promoCode={promoCode}
+          setPromoCode={setPromoCode}
+          appliedPromo={appliedPromo}
+          setAppliedPromo={setAppliedPromo}
+          checkoutError={checkoutError}
+          setCheckoutError={setCheckoutError}
+          discountAmount={discountAmount}
+          deliveryFee={deliveryFee}
+          estimatedTax={estimatedTax}
+          orderTotal={orderTotal}
+        />
+      )}
 
-      {notice && <div className="toast" role="status">{notice}</div>}
+      {notice && (
+        <div className="toast" role="status">
+          {notice}
+        </div>
+      )}
     </div>
   );
 }

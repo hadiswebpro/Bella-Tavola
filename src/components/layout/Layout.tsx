@@ -20,7 +20,7 @@ export default function Layout({
         isMiniCartOpen={isMiniCartOpen}
         onCartClick={onCartClick}
       />
-      {children}
+      <main>{children}</main>
       <Footer />
     </>
   );
